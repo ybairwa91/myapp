@@ -237,29 +237,218 @@ function Garage() {
     </>
     );
   }
-  */
-function App() {
-  return <Garage />;
+  function App() {
+    const name = "garage";
+  return <Garage name={name} />;
 }
 function Cars({ carInfo }) {
   return (
     <>
       <h2>
         I am a {carInfo.carName} {carInfo.model}
-      </h2>
+        </h2>
+    </>
+  );
+}
+function Garage({ name }) {
+  const car = { carName: "FORD", model: "ct-20" };
+  <>
+  return (
+      <h1>I am in a {name} </h1>
+      <Cars carInfo={car} />
+      </>
+      );
+    }
+    //JSX RULES
+    //1.
+    function App() {
+      const h1 = "HI REACT";
+      return <h1>{h1}</h1>;
+    }
+    //2.jsx expression inside
+    function App() {
+      const h1 = "HI REACT";
+      return <h1>{h1.split(" ").splice(-1)}</h1>;
+    }
+    //3.statements not allowed
+    function App() {
+  const h1 = "HI REACT";
+  return (
+    //not acceptable
+    // if(true){
+      //   return <h1>{h1}</h1>
+    // } else return null;
+    <h1>{h1}</h1>
+  );
+}
+//but you conditionally render components since js allowed in logic section of a component
+
+function App() {
+  const isGoal = 1;
+  if (isGoal) {
+    return <Madegoal />;
+  } else {
+    return <Nogoal />;
+  }
+}
+function Madegoal() {
+  return <h1>Its a Goal🙂</h1>;
+}
+
+function Nogoal() {
+  return <h1>You missed it😮</h1>;
+}
+
+function App() {
+  return <CheckGoal isGoal={false} />;
+}
+function CheckGoal(isGoal) {
+  if (isGoal) {
+    return <Madegoal />;
+  } else {
+    return <Nogoal />;
+  }
+}
+function Madegoal() {
+  return <h1>Its a Goal🙂</h1>;
+}
+
+function Nogoal() {
+  return <h1>You missed it😮</h1>;
+}
+
+function App() {
+  return <CheckGoal isGoal={false} />;
+}
+function CheckGoal({ isGoal }) {
+  return <>{isGoal ? <Madegoal /> : <Nogoal />}</>;
+}
+
+function Madegoal() {
+  return <h1>Its a Goal🙂</h1>;
+}
+
+function Nogoal() {
+  return <h1>You missed it😮</h1>;
+}
+//use of && and || for conditional rendering
+function App() {
+  return <Garage />;
+}
+function Cars({ car }) {
+  return (
+    <div>
+      {car.length > 0 && <h1>This is my car:{car[0]}</h1>}
+      <h2>Third line</h2>
+      {<h3>This is fourth one</h3>}
+
+    </div>
+  );
+}
+function Garage() {
+  const cars = ["ford", "bmw", "benz"];
+  // const cars = [];
+  return (
+    <>
+      <h1>This is my garage</h1>
+      <Cars car={cars} />
+    </>
+    );
+  }
+  
+  //now we want to do for all cars
+  //first way
+  
+  function App() {
+  return <Garage />;
+}
+function Cars({ car }) {
+  return (
+    <>
+      <div>
+        {car.length > 0 && <h1>This is my car:{car[0]}</h1>}
+        <h2>Third line</h2>
+        {<h3>This is fourth one</h3>}
+        </div>
+      <div>
+      {car.length > 0 && <h1>This is my car:{car[1]}</h1>}
+        <h2>Third line</h2>
+        {<h3>This is fourth one</h3>}
+      </div>
+      <div>
+        {car.length > 0 && <h1>This is my car:{car[2]}</h1>}
+        <h2>Third line</h2>
+        {<h3>This is fourth one</h3>}
+      </div>
     </>
   );
 }
 function Garage() {
-  const car = { carName: "FORD", model: "ct-20" };
+  const cars = ["ford", "bmw", "benz"];
+  // const cars = [];
   return (
     <>
-      <h1>I am in a Garage</h1>
-      <Cars carInfo={car} />
+    <h1>This is my garage</h1>
+    <Cars car={cars} />
+    </>
+    );
+  }
+  
+  function App() {
+  return <Garage />;
+}
+function Cars({ cars }) {
+  return (
+    <>
+      <div>
+        {cars.length > 0 && cars.map((car, i) => <List name={car} key={i} />)}
+      </div>
+    </>
+    );
+  }
+function List({ name }) {
+  return <h1>This is my car:{name}</h1>;
+}
+function Garage() {
+  const cars = ["ford", "bmw", "benz"];
+  // const cars = [];
+  return (
+    <>
+    <h1>This is my garage</h1>
+      <Cars cars={cars} />
     </>
   );
 }
-//////////////////
+//rending list 
+function App() {
+  const cars = ["ford", "bmw", "benz"];
+  return (
+    <>
+    <h1>This is my garage</h1>
+    {cars.length > 0 && cars.map((car, i) => <h1>This is my car:{car}</h1>)}
+    </>
+    );
+  }
+  
+//another way
+  function App() {
+  return <Garage />;
+}
+function Car({ name }) {
+  return <h1>This is my car:{name}</h1>;
+}
+function Garage() {
+  const cars = ["ford", "bmw", "benz"];
+  return (
+    <>
+      <h1>This is my garage</h1>
+      {cars.length > 0 && cars.map((car, i) => <Car name={car} key={i} />)}
+      </>
+      );
+    }
+    */
+
+/////////////////
 /*
 const pizzaData = [
   {
